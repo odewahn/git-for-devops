@@ -24,5 +24,6 @@ var parseMdFile = function(source, output) {
   var md = fs.readFileSync( source, {encoding: 'utf-8'})
   fs.writeFileSync(output, converter.makeHtml(md), {encoding: 'utf-8'})
   console.log('-> generated %s from %s', output, source);
-} 
-module.exports = parseMdFile
+}
+parseMdFile('../main.md', '../public/main.html')
+

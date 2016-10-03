@@ -9,8 +9,7 @@
     "showdown": "^1.4.3"
   },
   "scripts": {
-    "start": "cd frontend; node index.js",
-    "build": "cd frontend; node bundle.js",
+    "build": "cd scripts; node parse-markdown.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
