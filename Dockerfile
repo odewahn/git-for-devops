@@ -7,8 +7,8 @@ RUN python -m bash_kernel.install
 USER root
 
 # Install a simple server that can publish a directory as a file
-RUN wget -q https://github.com/odewahn/httpServe/releases/download/0.0.2/httpServe-0.0.2-linux-amd64
-RUN mv httpServe-0.0.2-linux-amd64 /usr/local/bin/httpServe
+RUN wget -q https://github.com/odewahn/httpServe/releases/download/0.0.4/httpServe-0.0.4-linux-amd64
+RUN mv httpServe-0.0.4-linux-amd64 /usr/local/bin/httpServe
 RUN chmod +x /usr/local/bin/httpServe
 
 # launchbot-specific labels
