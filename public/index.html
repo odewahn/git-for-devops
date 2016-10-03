@@ -1,79 +1,99 @@
 <!DOCTYPE html>
 <html>
   <head>
-        <meta charset="utf-8">
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Version Control and Source Code Management</title>
-        
-        <!-- Styles + O'Reilly Theme -->
-        <link rel="stylesheet" href="assets/oriole.oreilly.css">
-        <!-- CodeMirror -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.6.0/codemirror.min.css" type="text/css"/>
-
-      <script src="assets/oriole.js"></script>
-
-      <!-- ONLY FOR THIS DEMO -->
-      <script>
-
-        var tempData = {
-          "icons-svg":"/assets/icons.svg"
-        }
-        var analytics = analytics ||  { track: function(){}}
-        var orm = orm || {Authenticator: {currentUser: function(){return false}}}
-      </script>
-
-      <!-- THEBE AND LANDER INSTANTIATION -->
-      <script>
-      $(function() {
-
-        // Dynamically load content before instantiating, XXX only for demo/workspace
-        // Makes it easier to swap content in and out
-        $(".article-body").load("main.html", function(){
-            var opt, pm, video_player;
-            thebe = new Thebe({
-              selector: "pre[data-executable]",  
-              kernel_name: "bash",
-              debug: true,
-              url: "https//oreillyorchard.com:8000"
-            });
-            window.thebe= thebe;
-
-            opt = {
-              duration: [14, 43],
-              cues: "cues.json",
-              dimensions: [854, 480],
-              debug: true,
-              cue_creator_mode: true,
-              volume: 0.4,
-              poster: "/assets/poster.jpg",  
-              show_feedback: false,
-              videojs_options: { 
-                "techOrder": ["youtube"],
-                "src": "https://www.youtube.com/embed/1VAsHaeX4vo?vq=hd1080&html5=1",
-              }
-            };
-
-            lander = new Lander( opt, tempData );
-            window.lander = lander;
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Version Control and Source Code Management</title>
+    
+    <!-- Styles + O'Reilly Theme -->
+    <link rel="stylesheet" href="assets/lander.css">
+    <link rel="stylesheet" href="assets/oreilly.theme.css">
+    <!-- CodeMirror -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.6.0/codemirror.min.css" type="text/css"/>
 
 
-            // super hacky way of making the CodeMirror cells oreilly style
-            $('.CodeMirror.cm-s-default').removeClass('cm-s-default').addClass('cm-s-oreilly');
 
-            window.vp = video_player;
+    <script src="assets/lander.js"></script>
+    <script src="assets/thebe.js"></script>
 
-            thebe.events.on("output_message.OutputArea", function(){
-              console.log("output");
-              lander.dom_changed()
-            });
-      
+    <!-- ONLY FOR THIS DEMO -->
+    <script>
+
+      var tempData = {
+        "icons-svg":"/assets/icons.svg"
+      }
+      var analytics = analytics ||  { track: function(){}}
+      var orm = orm || {Authenticator: {currentUser: function(){return false}}}
+    </script>
+
+    <!-- THEBE AND LANDER INSTANTIATION -->
+    <script>
+    $(function() {
+      var DEBUG = false
+      // Dynamically load content before instantiating, XXX only for demo/workspace
+      // Makes it easier to swap content in and out
+      $(".article-body").load("main.html", function(){
+          var opt, pm, video_player;
+          thebe = new Thebe({
+            selector: "pre[data-executable]",  
+            kernel_name: "bash",
+            debug: DEBUG,
+            url: "https//oreillyorchard.com:8000"
+          });
+          window.thebe= thebe;
+
+          opt = {
+            duration: [14, 43],
+            cues: "cues.json",
+            dimensions: [854, 480],
+            debug: DEBUG,
+            cue_creator_mode: true,
+            volume: 0.4,
+            poster: "/assets/poster.jpg",  
+            show_feedback: false,
+            videojs_options: { 
+              "techOrder": ["youtube"],
+              "src": "https://www.youtube.com/embed/1VAsHaeX4vo?vq=hd1080&html5=1",
+            }
+          };
+
+          lander = new Lander( opt, tempData );
+          window.lander = lander;
+
+
+          // super hacky way of making the CodeMirror cells oreilly style
+          $('.CodeMirror.cm-s-default').removeClass('cm-s-default').addClass('cm-s-oreilly');
+
+          window.vp = video_player;
+
+          thebe.events.on("output_message.OutputArea", function(){
+            console.log("output");
+            lander.dom_changed()
+          });
+    
         }); // end load callback
       }); //end domready
       </script>
       <style>
       pre[data-output] {
         display: none;
+      }
+      .code_cell {
+        max-width: 64%;
+        margin-left: 4.86111%;
+      }
+      .thebe_controls {
+        margin-top: .5em;
+        margin-bottom: 1em;
+      }
+      .thebe_controls button {
+        padding-top: .2em;
+        padding-bottom: .1em;
+      }
+      .cm-s-oreilly.CodeMirror {
+        min-height: 4rem;
+        padding-bottom: .5em;
       }
       </style>
     </head>
