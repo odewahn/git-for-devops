@@ -1,8 +1,8 @@
 FROM jupyter/minimal-notebook:latest
 
+# Install the bash kernel on the image
 RUN pip install bash_kernel
 RUN python -m bash_kernel.install
-
 
 # launchbot-specific labels
 LABEL name.launchbot.io="Git for DevOps"
