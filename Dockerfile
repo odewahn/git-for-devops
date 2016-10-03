@@ -26,7 +26,7 @@ EXPOSE 8888
 EXPOSE 5000
 
 # Install and run the startup script
-RUN cp ./run.sh /usr/local/bin/run.sh
+RUN wget -O /usr/local/bin/run.sh -q https://raw.githubusercontent.com/odewahn/git-for-devops/serveSite/run.sh
 RUN chmod +x /usr/local/bin/run.sh
 
 USER jovyan
