@@ -21,8 +21,8 @@ LABEL 8000.port.launchbot.io="Static Site"
 # Set the working directory
 WORKDIR /usr/workdir
 
-ADD index.html index.html
-ADD main-built.js main-built.js
+ADD public public
+
 # Expose the notebook port
 EXPOSE 8888
 EXPOSE 8000
