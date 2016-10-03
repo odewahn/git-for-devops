@@ -6,7 +6,8 @@
   "dependencies": {
     "Lander": "git+https://64cd40eef5441e8f819b3b60417322ecf1a844c7@github.com/oreillymedia/lander.git#clean-lander",
     "finalhandler": "^0.5.0",
-    "serve-static": "^1.11.1"
+    "serve-static": "^1.11.1",
+    "thebe": "git+https://64cd40eef5441e8f819b3b60417322ecf1a844c7@github.com/oreillymedia/thebe.git#package-json"
   },
   "devDependencies": {},
   "scripts": {
