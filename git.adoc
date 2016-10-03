@@ -1,0 +1,444 @@
+== Version Control and Source Code Management
+Version control is how you can ensure that you can recall older versions of a file when you need them. A version control system records changes to one or more files and lets you easily recall any older version you want.
+
+In the previous chapter, you learned about the concept of Infrastructure as Code. A Version Control system can act as the foundation for Infrastructure as Code. Everything you do in your infrastructure, you can capture it in scripts, configuration files and definition files and check them into a VC such as Git.
+
+In this chapter, I explain the essentials of Git, which is the most popular version control system today.
+
+==== Revision Control and Infrastructure Management
+One might wonder how revision control, which has traditionally been used for source code management, helps with infrastructure management. System administrators can use revision control in exactly the same way as developers do!
+
+For example, you can use Git for storing the BIND configuration you use in your environment. Similarly, you can store the configuration details for software such as Postfix, iptables, Hadoop and Mysql, etc in revision control.
+
+NOTE: Configuration management tools such as Puppet and Chef integrate well with Git
+
+You can change all your infrastructure related scripts and configuration files in a VCS. When a system administrator wants to make changes, he/she checks the necessary files out of the VCS, makes their changes, and commits them back into the VCS.
+
+These committed changes are then available for application to the infrastructure. If you’re using a change management pipeline (see Chapter 11), the changes are automatically applied to and tested in a test environment. If different members of the admin team are making incompatible configuration changes, the VCS will force you to reconcile the differences by showing up the changes as being in conflict with each other.
+
+In this context, it’s interesting to know that a lot of open source software projects such as the Linux kernel, OpenStack, and Yum, store their source code in Git.
+
+=== Our First Foray into the World of Git
+In this section, I get your feet wet, by providing a whirlwind tour through basic Git operations. This way, you get a good flavor of Git commands and Git operations and what they do. I’ll follow this section up with a brief explanation of Git’s fundamental features: branching, committing, and cloning.
+
+Installing Git is quite easy, and you can look it up. Let’s say you are in an empty directory such as /home/testdir. From this directory, create a local git repository with the git init command:
+
+----
+$ git init
+Initialized empty Git repository in /home/salapati/testdir/.git/
+$
+Let’s create a simple Python file named test.py with the following content:
+print(‘Hello Git!’)
+Let’s add this new Python file to the git repository I initialized earlier.
+$ git add test.py
+Check the status of your new repository with the git status command:
+$ git status
+On branch master
+Initial commit
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+    new file:   test.py
+----
+
+The output of the git status command reveals that there are “changes to be committed”. Our new file test.py is sure part of the local repository but not yet committed. Why don’t we commit the changes and see what happens?
+
+----
+$ git commit -m "simple print program"
+ [master (root-commit) 52d60d7] my first commit
+  1 file changed, 1 insertion(+)
+  create mode 100644 test.py
+----
+
+Check the current status of the git local repository.
+
+----
+$ git status
+ On branch master
+ nothing to commit, working directory clean
+----
+
+OK! My test.py file is safely tucked away now in my local repository. Just for the heck of it, I make a change in the test.py file and see what git says.
+
+----
+$ git status
+
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+    modified:   test.py
+
+no changes added to commit (use "git add" and/or "git commit -a")
+----
+
+I can execute the diff command to see the differences between the original test.py file and the modified version of that file. The git diff command shows the changes since the last commit of the test.py file:
+
+----
+$ git diff
+diff --git a/test.py b/test.py
+index 76b8c39..62782b2 100644
+--- a/test.py
++++ b/test.py
+@@ -1 +1 @@
+-print('Oops')
++print('Ops!')
+----
+
+In order to commit the changes I’ve made to the test.py file, I need to first add the modified test.py file:
+
+----
+$ git add test.py
+----
+
+Once I add the new test.py file, I commit the change:
+
+----
+$ git commit -m "my first change"
+ [master e1e11ec] my first change
+  1 file changed, 1 insertion(+), 1 deletion(-)
+----
+
+The git log command will let you see all the changes you’ve made to the test.py file.
+
+----
+git log test.py
+ commit e1e11ecf802ae1a78debe6193c552dcd15ca160a
+ Author: William Lubanovic <bill@madscheme.com>
+ Date:   Tue May 13 23:34:59 2016 -0500
+     change the print string
+ commit 52d60d76594a62299f6fd561b2446c8b1227cfe1
+ Author: William Lubanovic <bill@madscheme.com>
+ Date:   Tue May 13 23:26:16 2016 -0500
+     simple print program
+
+git clone https://github.com/craig5/salt-essentials-utils
+Cloning into 'salt-essentials-utils'...
+remote: Counting objects: 523, done.
+remote: Total 523 (delta 0), reused 0 (delta 0), pack-reused 523
+Receiving objects: 100% (523/523), 83.00 KiB | 0 bytes/s, done.
+Resolving deltas: 100% (167/167), done.
+Checking connectivity... done.
+
+SG0221771@D4T11J72 ~/salt
+$
+----
+
+=== Introduction to Git
+Git is a popular version control (revision control) software. Modern apps are created by large teams of developers working together in hundreds of files simultaneously. A source control tool such as Git makes it easy for groups to work on text files used in creating software.
+
+==== What Sets Git Apart from other CVS Systems?
+Following are the main features that set git apart from other similar systems:
+
+** Branching: Branching is probably git’s most powerful feature and this alone would be a good reason to choose git over other systems. The git branching model has revolutionize collaboration among developers, who can create, merge and share branches easily with others working with them.
+** Data integrity: and introduces all changes as revisions which can be inspected provides strong integrity by tracking gall files and directories introduces all changes as revisions that can be easily inspected. Data integrity ensures that there’s no chance for a change to go unnoticed by the system.
+** Distributed model: Unlike centralized VC systems that use a client/server model, git is a distributed VC system. This means that all repositories are fully functional and can send and receive content.
+** Locality: You can use git locally which means that you aren’t reliant on the network to execute most git commands. Most git commands such as commit, branch and merge don’t involve any data transfer and can be performed locally where you run git.
+
+Installing Git is pretty trivial (use yum or apt to install git) and if you’ve Cygwin installed, you already have git. The more important thing to know is that git expects you to configure it before you can use it. Before you can commit anything within a git repository, you must configure the user.name and user.mail settings. Here’s how I did it:
+
+----
+$ git config --global user.name "Sam Alapati". Let’s create a text file with some conent and save the file.
+$ git config --global user.email sam.alapati@gmail.com
+----
+
+Now that some preliminaries are out of the way, let’s start exploring git and see how you perform various VC tasks with it.
+
+=== Creating Local Repositories with Git
+Git is a distributed version control system. In a traditional centralized version control system such as Subversion or CVS, the repository isn’t local – it’s stored on a remote server. When you commit your changes, they’re sent over the network and committed to the VC system so others can view the changes.
+
+      You can choose to send your commits from another repository, store all your commits, branches and history offline. Git being a distributed VC system, everyone has a complete repository on their own local server. You can also access a centralized repository, but you don’t access it unless you specifically want to.
+
+==== Creating a Repository
+You create a new Git repository with the git init command, as shown here:
+
+----
+$ mkdir my-git
+
+$ cd my-git
+
+$ git init May24
+Initialized empty Git repository in /my-git/May24/.git/
+$
+----
+
+Note that May24 is the working directory for this project.
+
+==== Checking the Repository Status
+When you first create a repository, of course it’s empty! You can check the status of the repository with the git status command to see what git shows you:
+
+----
+$ cd May24
+
+$ git status
+On branch master
+
+Initial commit
+
+nothing to commit (create/copy files and use "git add" to track)
+
+$
+----
+
+In the comments, Initial commit means that the repository is ready for its first commit. Let’s create a text file and save it:
+
+
+----
+$ cat test.txt
+This is my first Git file.
+I'm going to commit it now!`
+----
+
+Once I save my file, it becomes a part of the Git repository. Now, when I issue the git status command, I see something – the file I created, test.txt, is now part of the new repository! All changes made to that file will be henceforth tracked and all the versions of the file will be saved as well.
+
+----
+$ git status –s
+?? test.txt
+$
+----
+The –s flag for the git status command prints a shortened output of the git status command.
+
+NOTE: A clean repository has no files that need to be committed. A dirty repository is one where there are one ore more uncommitted files.
+
+===== COMMITTING A FILE
+Is my new file committed so I won’t lose it? Well, the two question marks (??, are Git’s way of telling you that the test.txt file isn’t yet committed. The repository is dirty, meaning it contains files that were modified by not committed.
+
+In order to commit the test.txt file, I use the following two commands:
+
+----
+$ git add -A
+
+$ git commit -m "First Revision [test.txt]"
+[master (root-commit) 4a6fdd7] First Revision [test.txt]
+ 1 file changed, 2 insertions(+)
+ create mode 100644 test.txt
+
+$
+----
+
+Here’s what the two commands do:
+
+** add: Adds file contents to the index (updates what will be committed)
+** commit: Records changes to the repository
+
+Committing the file means there are no more uncommitted files lying around in the working directory, which leads to the got repository being assigned the status of clean (as opposed to dirty). If you issue the git status command now, it confirms that the repository is clean:
+
+----
+$ git status
+On branch master
+nothing to commit, working directory clean
+
+$
+----
+
+==== Checking the Logs and the Status of a Repository
+When I check the log of the repository, it shows that I’ve one revision:
+
+----
+$ git log
+commit 4a6fdd7bf247db95f7d8d67085d5dffc02eba3ea
+Author: Sam Alapati <sam.alapati@gmail.com>
+Date:   Tue May 24 05:53:50 2016 -0500
+
+    First Revision [test.txt]
+
+$
+----
+
+The git log command shows commit logs.
+
+
+Now let me make a change to the test.txt file by adding a third line to it. I check the status afterwards:
+
+----
+$ git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+        modified:   test.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+$
+----
+
+I decide this time to issue jut the git commit command (without preceding it with the git add command) to commit my git changes:
+
+----
+$ git commit -a
+[master dfee066] Added a third line now
+ 1 file changed, 1 insertion(+)
+
+$
+----
+
+I can issue the git status or the git commit command to check of the directory s clean.
+
+----
+$ git commit -a
+On branch master
+nothing to commit, working directory clean
+
+$
+----
+
+Git lets you restore a project to the very first revision, or any other revisions you’ve committed since then.
+
+=== Staging and Committing Files
+Git never automatically register any changes you make in the working directory. In the previous section, I showed how you need to issue the got add –A and git commit –m commands t create a new revision.
+
+Although it seemed like this part of commands constituted a single operation, they actually take care of two distinct steps:
+
+** The git add command selects the files for the revision. These files are called staging files, and a list of the staged files is stored in the index or staging are, in the file .git/index.
+** The git commit command creates the revision with the files that have been selected.
+
+All files you store in a Git repository fall into three groups:
+
+** Untracked: When you first create a file, it’s an untracked file, meaning git doesn’t store the file in its repository and also doesn’t track the files contents. This is the reason you see the two question marks (??), with the first ?, indicating that the file is unknown in the staging area and the second ? indicating that the file is unknown in the working directory as well.
+** Staged: These are files that are in the staging rea and whose list is stored in the .git/index file. When you issue the command git commit –m, all the changes in the staging area go into the revision.
+** Unmodified: These are files that are stored in a repository following a commit. As you saw earlier, the git status command doesn’t show any information about unmodified files.
+
+==== Committing Multiple Files
+In the examples I showed earlier, I staged and committed a single file at a time. Let’s’ see how you can stage and commit multiple files at a time.
+
+In this example, I have several files such as new.txt, deleted.txt, modified.txt, and old.txt. I delete the file deleted.txt and rename the file old.txt to revised.txt. When I run the git status command, I see the following:
+
+----
+$ git status
+On branch master
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+        modified.txt
+        new.txt
+        revised.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+$
+----
+
+Git recognizes that there are “untracked” files present in the working directory. It also suggests running git add to track the files. I run the git add –A command to stage all my changes in one fell swoop:
+
+----
+$ git add -A
+
+$ git status
+On branch master
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+        new file:   modified.txt
+        new file:   new.txt
+        new file:   revised.txt
+$
+----
+
+Finally, I commit all of my changes:
+
+----
+$ git commit -m "Commit all my changes"
+[master e2df127] Commit all my changes
+ 3 files changed, 3 insertions(+)
+ create mode 100644 modified.txt
+ create mode 100644 new.txt
+ create mode 100644 revised.txt
+
+$
+----
+
+When I run the git status command, there’s no output since the working directory is clean and there’s nothing to commit:
+$ git status –s
+
+==== Cloning Repositories
+Sometimes you may need to copy an entire repository, with the copy containing all the branches stored in the original repository.  You can use the git clone command to clone repositories:
+
+----
+$ ls
+May24
+
+
+$ git clone May24 May25
+Cloning into 'May25'...
+done.
+
+$ ls
+May24  May25
+----
+
+
+In this example I used the git clone command to clone the May25 repository named May24 from the original repository named May24.
+
+==== Remote Git
+While it’s possible to work with Git as a pure local version control system, and never have to share your changes, you’ll often want to share changes with others, usually as part of collaborating with a team. You use a remote repository for sharing changes with others.
+
+You can use various types of remote repositories, including GitHub. Since multiple repositories can be connected to your local repository, the remote repositories aren’t named, but if you have a single remote repository, it’s usually named origin.
+
+You use the git push command to push changes from a local repository to a remote repository.
+
+=== The Git Branching Model
+One of the things that makes Git far superior to alternative VCS systems is its branching model. The power offered by just this one capability may justify a switch from an alternative VC system to Git.
+
+New branch means creating a copy of a project. You can work with this copy without affecting the project. If your changes don’t work out you can simply abandon the branch and return to the original, which is always called the master branch. If your changes work out, on the other hand. You can easily incorporate the changes into the master. You also can revert to the state of the project before the merge, at a later point, should you so desire.
+
+NOTE: By convention, users expect to find the latest code for a project in its master branch.
+
+A branch is an independent line of development – I’s a pointer to an arbitrary commit in the database. You can preserve any point in your project’s history by creating a branch. Branches are independent of each other, and modifying one branch doesn’t affect the other branches. Your commits tin a branch don’t affect other branches. Only you can modify the branches you create – Git won’t ever modify them.
+
+Creating and switching branches lets you fork your project into independent development lines. For example, one may create a branch to add new features to your application, or to implement bug fixes. The best practice when performing work on a new topic is to perform it in a dedicated branch.
+
+==== Creating Branches
+By default, when you initialize a new repository (as I showed earlier), the repository will just have a single branch named master:
+
+----
+$ git branch
+* master
+----
+
+The asterisk denotes the current branch where you are. If you commit anything now, it’ll be part of this current branch.
+
+NOTE: You can use the git branch command to list, create and delete branches.
+
+You can create a new branch with the git branch command, as shown in the following example, where I create the new branch named test.
+
+----
+$ git branch test
+
+* master
+  Test
+----
+
+As you can tell from the asterisk, your current branch is still master. You can switch to the new branch test by executing the git checkout command:
+
+----
+$ git checkout test
+M       virtual-machines/Vagrantfile
+Switched to branch 'test'
+Now, when I issue the git branch command, I can see that you’re now on the new branch test.
+$ git branch
+  master
+* test
+
+$
+----
+
+You can also create a new branch that points to an existing branch with the following command.
+
+----
+$ git checkout -b branch2 branch1
+----
+
+The new branch named branch2 will contain the same revision as the existing branch named branch1.
+
+==== Merging Branches
+As I mentioned earlier, you create branches to spawn alternate development lines, such as adding functionality to you application. Once you complete the work on the new features(s), you’ll want to incorporate your work into the main line of development. This process is called the merging of branches.
+
+Here’s an example showing how to merge branches:
+
+----
+$ git merge test12 test2 test3
+warning: old-style 'git merge <msg> HEAD <commit>' is deprecated.
+Already up-to-date.
+----
