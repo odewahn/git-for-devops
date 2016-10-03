@@ -39,10 +39,12 @@
       $(".article-body").load("main.html", function(){
           var opt, pm, video_player;
           thebe = new Thebe({
-            selector: "pre[data-executable]",  
-            kernel_name: "bash",
+            selector:"pre[data-executable]",
+            add_interrupt_button: true,
+            kernel_name: "python3",
+            tmpnb_mode: false,
+            url:"http://localhost:8888",
             debug: DEBUG,
-            url: "https//oreillyorchard.com:8000"
           });
           window.thebe= thebe;
 
@@ -101,6 +103,11 @@
       div#controls .overlay > div {
         width: 36%;
       }
+
+      line.video_progress {
+        stroke: #4278bb;
+      }
+
       pre[data-output] {
         display: none;
       }
@@ -112,10 +119,14 @@
         margin-top: .5em;
         margin-bottom: 1em;
       }
-      .thebe_controls button {
+      
+      body button {
         padding-top: .2em;
         padding-bottom: .1em;
         background-color: #4278bb;
+      }
+      body button:hover {
+        background-color: #325888;
       }
       .cm-s-oreilly.CodeMirror {
         min-height: 4rem;

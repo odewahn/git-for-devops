@@ -36,10 +36,12 @@
       $(".article-body").load("main.html", function(){
           var opt, pm, video_player;
           thebe = new Thebe({
-            selector: "pre[data-executable]",  
-            kernel_name: "bash",
+            selector:"pre[data-executable]",
+            add_interrupt_button: true,
+            kernel_name: "python3",
+            tmpnb_mode: false,
+            url:"http://localhost:8888",
             debug: DEBUG,
-            url: "https//oreillyorchard.com:8000"
           });
           window.thebe= thebe;
 
