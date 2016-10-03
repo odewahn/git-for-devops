@@ -1,0 +1,26 @@
+{
+  "name": "oriole-frontend",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "Lander": "git+https://64cd40eef5441e8f819b3b60417322ecf1a844c7@github.com/oreillymedia/lander.git#clean-lander",
+    "finalhandler": "^0.5.0",
+    "serve-static": "^1.11.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/odewahn/project-whitewater-oriole.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/odewahn/project-whitewater-oriole/issues"
+  },
+  "homepage": "https://github.com/odewahn/project-whitewater-oriole#readme"
+}
