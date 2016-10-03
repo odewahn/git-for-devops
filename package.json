@@ -4,14 +4,18 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "Lander": "git+https://64cd40eef5441e8f819b3b60417322ecf1a844c7@github.com/oreillymedia/lander.git#clean-lander",
+    "Lander": "git+https://d7d350461c512dce48aadaecf9c2c9202ba30619:x-oauth-basic@github.com/oreillymedia/lander.git#clean-lander",
     "finalhandler": "^0.5.0",
     "serve-static": "^1.11.1",
-    "thebe": "git+https://64cd40eef5441e8f819b3b60417322ecf1a844c7@github.com/oreillymedia/thebe.git#package-json"
+    "showdown": "^1.4.3",
+    "thebe": "git+https://d7d350461c512dce48aadaecf9c2c9202ba30619:x-oauth-basic@github.com/oreillymedia/thebe.git#package-json"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "concat-files": "^0.1.0"
+  },
   "scripts": {
-    "start": "node index.js",
+    "start": "cd frontend; node index.js",
+    "build": "cd frontend; node bundle.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

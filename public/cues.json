@@ -1,0 +1,15 @@
+[
+  {
+    "time": [0,5],
+    "text": "Version control and source code management",
+    "sel": "#revisioncontrolandinfrastructuremanagement",
+    "scroll": true
+  },
+  {
+    "time": [0,10],
+    "text": "Our First Foray into the World of Git",
+    "sel": "#ourfirstforayintotheworldofgit",
+    "scroll": true
+  }
+  
+]

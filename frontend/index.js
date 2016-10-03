@@ -11,4 +11,5 @@ var server = http.createServer(function onRequest (req, res) {
 })
 
 // Listen
+console.log('Server started on http://localhost:%s', 5000)
 server.listen(5000)

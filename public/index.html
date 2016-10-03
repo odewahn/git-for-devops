@@ -6,22 +6,17 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Version Control and Source Code Management</title>
         
-        <!-- Styleguide -->
-        <link rel="stylesheet" href="oreilly.dev.css">
-        <!-- Lander-specific styles -->
-        <link rel="stylesheet" href="lander.dev.css">
-
+        <!-- Styles + O'Reilly Theme -->
+        <link rel="stylesheet" href="assets/oriole.oreilly.css">
+        <!-- CodeMirror -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.6.0/codemirror.min.css" type="text/css"/>
 
-      <script src="lander.dev.js"></script>
+      <script src="assets/oriole.js"></script>
 
-      <!-- Thebe -->
-      <script src="cdn/main-built.js"></script>
-      
       <!-- ONLY FOR THIS DEMO -->
       <script>
 
-              var tempData = {
+        var tempData = {
           "icons-svg":"/assets/icons.svg"
         }
         var analytics = analytics ||  { track: function(){}}
@@ -51,7 +46,8 @@
               debug: true,
               cue_creator_mode: true,
               volume: 0.4,
-              poster: "maru.png",  
+              poster: "/assets/poster.jpg",  
+              show_feedback: false,
               videojs_options: { 
                 "techOrder": ["youtube"],
                 "src": "https://www.youtube.com/embed/1VAsHaeX4vo?vq=hd1080&html5=1",
@@ -75,7 +71,11 @@
         }); // end load callback
       }); //end domready
       </script>
-
+      <style>
+      pre[data-output] {
+        display: none;
+      }
+      </style>
     </head>
     <body>
       <header id="page-header">
@@ -95,7 +95,7 @@
             <a href="http://shop.oreilly.com/">Shop</a>
           </nav>
           <div id="user" class="invert">
-            <a href="#feedback" class="t-c--d" id="feedback">Feedback</a>
+            
             <a href="?log-in" class="t-c--d" id="log-in">Log in</a>
             <a href="?log-out" class="t-c--d" id="log-out">Log out</a>
             <a href="/user/preferences" class="t-c--d" id="preferences"><span class="icon icon-configure icon--small t-fill ">
