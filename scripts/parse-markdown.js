@@ -4,12 +4,12 @@ var fs = require('fs'),
 
 // clean up code blocks
 showdown.extension('oriole', function () {
-  var code_blocks = { 
+  var code_blocks = {
     type: 'output',
     regex: /<pre><code class="(\w+).+?">([\s\S]+?)<\/code><\/pre>/g,
     replace: '<pre data-code-language="$1" data-executable="true" data-type="programlisting">$2</pre>'
   };
-  var output_blocks = { 
+  var output_blocks = {
     type: 'output',
     regex: /<pre><code>([\s\S]+?)<\/code><\/pre>/g,
     replace: '<pre data-output="true">$1</pre>'
@@ -25,5 +25,4 @@ var parseMdFile = function(source, output) {
   fs.writeFileSync(output, converter.makeHtml(md), {encoding: 'utf-8'})
   console.log('-> generated %s from %s', output, source);
 }
-parseMdFile('../main.md', '../public/main.html')
-
+parseMdFile('../main.md', '../main.html')

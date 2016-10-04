@@ -1,3 +1,18 @@
+# Building with NPM
+
+First, from your host, run this:
+
+```
+jupyter nbconvert --to markdown main.ipynb
+```
+
+Then, convert that to HTML:
+
+```
+npm run build
+```
+
+
 
 # Converting Notebook to Markdown
 

@@ -26,6 +26,8 @@
 
 <p>Before we start, let's switch over to a new working direcory:</p>
 
+<p><span id="makeDirectory"/></p>
+
 <pre data-code-language="bash" data-executable="true" data-type="programlisting">cd /tmp
 mkdir git-test
 cd git-test
@@ -33,11 +35,15 @@ cd git-test
 
 <p>We'll also need to provide some configuration information to (among other thing) identify ourselves in the commit history as we make changes:</p>
 
+<p><span id="configureGit"/></p>
+
 <pre data-code-language="bash" data-executable="true" data-type="programlisting">git config --global user.email "odewahn@oreilly.com"
 git config --global user.name "Andrew Odewahn"
 </pre>
 
 <p>From this directory, create a local git repository with the git init command:</p>
+
+<p><span id="initGit"/></p>
 
 <pre data-code-language="bash" data-executable="true" data-type="programlisting">git init
 </pre>
@@ -46,6 +52,8 @@ git config --global user.name "Andrew Odewahn"
 </pre>
 
 <p>Let’s create a simple Python file named test.py with the following content:</p>
+
+<p><span id="createHelloGitPy"/></p>
 
 <pre data-code-language="bash" data-executable="true" data-type="programlisting">echo "print('Hello Git')" &gt; test.py
 </pre>
@@ -60,10 +68,14 @@ git config --global user.name "Andrew Odewahn"
 
 <p>Let’s add this new Python file to the git repository I initialized earlier.</p>
 
+<p><span id="addTestPy"/></p>
+
 <pre data-code-language="bash" data-executable="true" data-type="programlisting">git add test.py
 </pre>
 
 <p>Check the status of your new repository with the git status command:</p>
+
+<p><span id="checkStatus"/></p>
 
 <pre data-code-language="bash" data-executable="true" data-type="programlisting">git status
 </pre>
@@ -79,6 +91,8 @@ Changes to be committed:
 </pre>
 
 <p>The output of the git status command reveals that there are “changes to be committed”. Our new file test.py is sure part of the local repository but not yet committed. Why don’t we commit the changes and see what happens?</p>
+
+<p><span id="firstCommit"/></p>
 
 <pre data-code-language="bash" data-executable="true" data-type="programlisting">git commit -m "simple print program"
 </pre>
@@ -99,6 +113,8 @@ nothing to commit, working directory clean
 
 <p>OK! My test.py file is safely tucked away now in my local repository. Just for the heck of it, I make a change in the test.py file and see what git says.</p>
 
+<p><span id="helloWorldPy"/></p>
+
 <pre data-code-language="bash" data-executable="true" data-type="programlisting">echo "print('Hello World')" &gt; test.py
 </pre>
 
@@ -116,6 +132,8 @@ no changes added to commit (use "git add" and/or "git commit -a")
 </pre>
 
 <p>I can execute the diff command to see the differences between the original test.py file and the modified version of that file. The git diff command shows the changes since the last commit of the test.py file:</p>
+
+<p><span id="gitDiff"/></p>
 
 <pre data-code-language="bash" data-executable="true" data-type="programlisting">git diff
 </pre>
@@ -136,6 +154,8 @@ index d7f199c..df1dc68 100644
 
 <p>Once I add the new test.py file, I commit the change:</p>
 
+<p><span id="secondCommit"/></p>
+
 <pre data-code-language="bash" data-executable="true" data-type="programlisting">git commit -m "my first change"
 </pre>
 
@@ -144,6 +164,8 @@ index d7f199c..df1dc68 100644
 </pre>
 
 <p>The git log command will let you see all the changes you’ve made to the test.py file.</p>
+
+<p><span id="gitLog"/></p>
 
 <pre data-code-language="bash" data-executable="true" data-type="programlisting">git log test.py
 </pre>
@@ -160,3 +182,5 @@ Date:   Sun Sep 25 21:32:15 2016 +0000
 
     simple print program
 </pre>
+
+<p><span id="theEnd"/></p>
