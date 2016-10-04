@@ -25,6 +25,8 @@ In this section, I get your feet wet, by providing a whirlwind tour through basi
 
 Before we start, let's switch over to a new working direcory:
 
+<span id="makeDirectory"/>
+
 
 ```bash
 cd /tmp
@@ -36,6 +38,8 @@ cd git-test
 
 We'll also need to provide some configuration information to (among other thing) identify ourselves in the commit history as we make changes:
 
+<span id="configureGit"/>
+
 
 ```bash
 git config --global user.email "odewahn@oreilly.com"
@@ -46,6 +50,8 @@ git config --global user.name "Andrew Odewahn"
 
 From this directory, create a local git repository with the git init command:
 
+<span id="initGit"/>
+
 
 ```bash
 git init
@@ -55,6 +61,8 @@ git init
 
 
 Let’s create a simple Python file named test.py with the following content:
+
+<span id="createHelloGitPy"/>
 
 
 ```bash
@@ -75,6 +83,8 @@ python test.py
 
 Let’s add this new Python file to the git repository I initialized earlier.
 
+<span id="addTestPy"/>
+
 
 ```bash
 git add test.py
@@ -83,6 +93,8 @@ git add test.py
     
 
 Check the status of your new repository with the git status command:
+
+<span id="checkStatus"/>
 
 
 ```bash
@@ -101,6 +113,8 @@ git status
 
 
 The output of the git status command reveals that there are “changes to be committed”. Our new file test.py is sure part of the local repository but not yet committed. Why don’t we commit the changes and see what happens?
+
+<span id="firstCommit"/>
 
 
 ```bash
@@ -125,6 +139,8 @@ git status
 
 OK! My test.py file is safely tucked away now in my local repository. Just for the heck of it, I make a change in the test.py file and see what git says.
 
+<span id="helloWorldPy"/>
+
 
 ```bash
 echo "print('Hello World')" > test.py
@@ -148,6 +164,8 @@ git status
 
 
 I can execute the diff command to see the differences between the original test.py file and the modified version of that file. The git diff command shows the changes since the last commit of the test.py file:
+
+<span id="gitDiff"/>
 
 
 ```bash
@@ -174,6 +192,8 @@ git add test.py
 
 Once I add the new test.py file, I commit the change:
 
+<span id="secondCommit"/>
+
 
 ```bash
 git commit -m "my first change"
@@ -184,6 +204,8 @@ git commit -m "my first change"
 
 
 The git log command will let you see all the changes you’ve made to the test.py file.
+
+<span id="gitLog"/>
 
 
 ```bash
@@ -202,3 +224,5 @@ git log test.py
     
         simple print program
 
+
+<span id="theEnd"/>
